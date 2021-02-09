@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from 'react';
+import { makeStyles, Theme } from '@material-ui/core';
+import {SecondScreen} from './components/second-screen/SecondScreen';
+import {FirstScreen} from './components/first-screen/FirstScreen';
 
-function App() {
+const useAppStyles = makeStyles<Theme>(({ spacing }) => ({
+  root: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridColumnGap: spacing(5),
+    margin: spacing(2),
+  },
+}));
+
+export const App: FC = () => {
+  const [selectedUser, setSelectedUser] = useState<string>();
+  const styles = useAppStyles();
+
+  const handleSelectUser = (login?: string) => setSelectedUser(login);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.root}>
+      <FirstScreen selectedUser={selectedUser} onSelectUser={handleSelectUser}/>
+      <SecondScreen selectedUser={selectedUser} />
     </div>
   );
 }
