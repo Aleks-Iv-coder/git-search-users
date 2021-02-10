@@ -1,6 +1,7 @@
 export default class GitService {
     private _apiBase = 'https://api.github.com';
     // https://api.github.com/search/users?q=${Login}&page=1&per_page=100
+    // 74a6100b67164129694d97342d9f9d4cc53e18cc
 
     async getResource(url: string) {
         const headers = {
